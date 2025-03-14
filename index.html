@@ -4,56 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PKolev20</title>
+    <link rel="icon" href="https://github.com/PetarK20/main.github.io/raw/main/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="https://github.com/PetarK20/main.github.io/raw/main/favicon-32x32.png" sizes="32x32" type="image/png">
+    
+
+    <!-- Добавяне на ръкописен шрифт от Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         /* Основен стил за страницата */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
+            background-color: #f0f4f8; /* Променен фон на страницата */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden; /* За да предотвратиш хоризонтално скролиране */
+            flex-direction: column;
+            overflow-x: hidden; /* Не позволява хоризонтално скролиране */
+            transition: background 1s ease;
         }
 
-        /* Заглавието на сайта */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 2em;
+        .content-wrapper {
+            width: 100%;
+            max-width: 1200px; /* Ширина на сайта с бяло пространство отстрани */
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+            opacity: 0;
+            animation: fadeInMainContent 2s 2s ease-out forwards;
+        }
+
+        /* Стилове за анимацията на началния екран */
+        .intro-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8; /* Същият фон като на основния сайт */
+            color: #000; /* Черни букви */
             text-align: center;
             opacity: 0;
+            animation: fadeInIntro 2s ease-out forwards;
+            flex-direction: column;
+            font-family: 'Pacifico', cursive; /* Ръкописен шрифт */
+        }
+
+        .intro-screen h1, .intro-screen p {
+            margin: 0;
+            animation: slideUp 1.5s ease-out forwards;
+        }
+
+        .intro-screen h1 {
+            font-size: 6em;
+            animation-delay: 0s;
+        }
+
+        .intro-screen p {
+            font-size: 3em;
+            animation-delay: 1s;
+        }
+
+        /* Анимации */
+        @keyframes fadeInIntro {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInMainContent {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Основния сайт */
+        header {
+            background-color: #3a66cc;
+            color: #fff;
+            padding: 4em 2em;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
             animation: fadeIn 2s ease-out forwards;
+            margin-bottom: 60px;
         }
 
         header h1 {
-            font-size: 3em;
+            font-size: 4.5em;
             margin: 0;
-            animation: slideInFromLeft 1.5s ease-out forwards;
+            font-weight: bold;
         }
 
         header p {
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin: 10px 0 0;
-            animation: slideInFromRight 1.5s ease-out forwards;
         }
 
         /* Навигационното меню */
         nav {
-            background-color: #444;
-            padding: 1em;
+            background-color: #ffffff;
+            padding: 1.5em;
             text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: background-color 0.3s ease;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #4d84f4;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 2em;
+            font-size: 1.6em;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
         }
 
-        /* Основната секция с линковете */
+        nav a:hover {
+            color: #2a5ba1;
+            transform: translateY(-3px);
+            background-color: #f4f9ff;
+        }
+
+        nav a img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
         section {
             display: flex;
             flex-direction: column;
@@ -67,9 +165,9 @@
         }
 
         section h2 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 30px;
-            animation: slideInFromTop 1.5s ease-out forwards;
+            color: #3a66cc;
         }
 
         ul {
@@ -79,54 +177,109 @@
         }
 
         li {
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         li a {
-            font-size: 2em;
+            font-size: 2.5em;
             text-decoration: none;
-            color: #333;
-            transition: color 0.3s ease;
+            color: #1a3d6d;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
         }
 
         li a:hover {
-            color: #666;
+            color: #4d84f4;
+            border-bottom: 2px solid #4d84f4;
         }
 
-        /* Футър */
+        .cards-container {
+            display: flex;
+            gap: 30px; /* Разстояние между проектите */
+            flex-wrap: wrap; /* Проектите ще се подреждат на нов ред, ако не се поберат */
+            justify-content: center; /* Центрира проектите по хоризонтала */
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Разширява се да запълни контейнера */
+            max-width: 350px; /* Ограничен размер */
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1.3em;
+            color: #777;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
         footer {
-            background-color: #333;
+            background-color: #3a66cc;
             color: #fff;
             text-align: center;
-            padding: 2em;
+            padding: 3em 0;
             opacity: 0;
             animation: fadeInFooter 2s 2s ease-out forwards;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1.2em;
+        }
+
+        /* Контакт секция */
+        .contact {
+            background-color: #f8f9fa;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .contact h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #3a66cc;
+        }
+
+        .contact p {
+            font-size: 1.6em;
+            color: #333;
         }
 
         /* Анимации */
+        @keyframes fadeInMainContent {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
-        }
-
-        @keyframes slideInFromLeft {
-            0% { transform: translateX(-100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInFromRight {
-            0% { transform: translateX(100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeInSection {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes slideInFromTop {
-            0% { transform: translateY(-100%); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
         }
 
         @keyframes fadeInFooter {
@@ -134,44 +287,95 @@
             100% { opacity: 1; }
         }
 
+        @keyframes fadeInSection {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
     </style>
 </head>
 <body>
+    <!-- Начален екран -->
+    <div class="intro-screen">
+        <div>
+            <h1>Petar Kolev</h1>
+            <p>22423</p>
+        </div>
+    </div>
 
-    <header>
-        <h1>My Main Website</h1>
-        <p>I am Petar</p>
-        <p>22423</p>
-    </header>
+    <!-- Основно съдържание -->
+    <div class="content-wrapper">
+        <header>
+            <h1>My Main Website</h1>
+            <p>I am Petar</p>
+            <p>22423</p>
+        </header>
 
-    <section id="section-links">
-        <h2>My Other Sites</h2>
-        <ul>
-            <li><a href="https://petark20.github.io/hangman.github.io/" target="_blank">HangMan</a></li>
-            <li><a href="https://petark20.github.io/convertor.github.io/" target="_blank">Number Converter</a></li>
-        </ul>
-    </section>
+        <nav>
+            <a href="#home">
+                <img src="https://img.icons8.com/ios/452/home.png" alt="Home">
+                Home
+            </a>
+            <a href="#section-links">
+                <img src="https://img.icons8.com/ios/452/link.png" alt="Links">
+                My Other Sites
+            </a>
+            <a href="#projects">
+                <img src="https://img.icons8.com/ios/452/project.png" alt="Projects">
+                Projects
+            </a>
+            <a href="#contact">
+                <img src="https://img.icons8.com/ios/452/contacts.png" alt="Contact">
+                Contact
+            </a>
+        </nav>
 
-    <footer>
-        <p>&copy; 2023 PKolev20. All rights reserved.</p>
-    </footer>
+        <section id="section-links">
+            <h2>My Other Sites</h2>
+            <ul>
+                <li><a href="https://petark20.github.io/hangman.github.io/" target="_blank">HangMan</a></li>
+                <li><a href="https://petark20.github.io/convertor.github.io/" target="_blank">Number Converter</a></li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <img src="https://education.oracle.com/file/general/p-80-java.png" alt="Project Image 1">
+                    <h3>Java</h3>
+                    <p><a href="https://github.com/PetarK20" target="_blank">Check out on GitHub</a></p>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png" alt="Project Image 2">
+                    <h3>Python</h3>
+                    <p><a href="https://github.com/PetarK20" target="_blank">Check out on GitHub</a></p>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png" alt="Project Image 3">
+                    <h3>HTML</h3>
+                    <p><a href="https://github.com/PetarK20" target="_blank">Check out on GitHub</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contacts</h2>
+            <p>Phone: ---</p>
+            <p>Email: petar.il.kolev@gmail.com</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2023-2025 PKolev20. All rights reserved.</p>
+        </footer>
+    </div>
 
     <script>
-        // Пример на JavaScript, който добавя ефект на кликване
         document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('header');
-            header.addEventListener('click', function() {
-                alert('Заглавието беше кликнато!');
-            });
-
-            // Ако искаш да направиш нещо с анимациите или други ефекти
-            window.onload = function() {
-                console.log('Страницата е заредена');
-                // Можеш да добавиш тук анимации, например с JavaScript
-                const h1 = document.querySelector('h1');
-                h1.style.transition = "transform 1s ease-in-out";
-                h1.style.transform = "scale(1.2)";
-            };
+            setTimeout(function() {
+                document.querySelector('.intro-screen').style.display = 'none';
+                document.querySelector('.content-wrapper').style.display = 'block';
+            }, 3000); 
         });
     </script>
 
