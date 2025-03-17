@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sort of an autobiography. 22423">
+    <meta name="keywords" content="petar, kolev, autobiography, Java, Python, HTML, CSS, JavaScript, GitHub, projects, contacts">
+    <meta name="author" content="Petar Kolev">
     <title>PKolev20</title>
     <link rel="icon" href="https://github.com/PetarK20/main.github.io/raw/main/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="https://github.com/PetarK20/main.github.io/raw/main/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -110,6 +113,58 @@
             font-size: 1.8em;
             margin: 10px 0 0;
         }
+        #clock {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 2rem; /* Намален размер */
+            font-weight: bold;
+            color: white; /* Цифрите ще са бели */
+            background-color: #3a66cc; /* Променен цвят на кутията */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Фиксира часовника */
+            top: 20px; /* Разстояние от горния ръб */
+            right: 20px; /* Разстояние от десния ръб */
+            z-index: 1000; /* За да е над всички други елементи */
+            display: inline-block;
+            text-align: center;
+            transform: scale(1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        #clock:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #clock .time {
+            font-size: 3rem; /* Намален размер за времето */
+            color: white; /* Бели цифри за времето */
+        }
+
+        #clock .date {
+            font-size: 1.2rem; /* Малък размер за датата */
+            color: #e0e0e0; /* Сив цвят за датата, за контраст */
+            margin-top: 5px;
+        }
+        #scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            background-color: #3a66cc;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        #scrollToTop:hover {
+            opacity: 1;
+        }
+
 
         /* Навигационното меню */
         nav {
@@ -292,24 +347,74 @@
             100% { opacity: 1; }
         }
         @media (max-width: 600px) {
-            .intro-screen h1 {
-                font-size: 2em;
+            body {
+                padding: 10px;
             }
-            .intro-screen p {
-                font-size: 1.2em;
+
+            header {
+                padding: 2em 1em;
             }
+
             header h1 {
                 font-size: 2.5em;
             }
+
+            .intro-screen h1 {
+                font-size: 2em;
+            }
+
+            .intro-screen p {
+                font-size: 1.2em;
+            }
+
+            #clock {
+                font-size: 1.5rem;
+                padding: 10px;
+                top: 10px;
+                right: 10px;
+            }
+
+            #scrollToTop {
+                font-size: 25px;
+                bottom: 15px;
+                right: 15px;
+            }
+
             nav {
                 flex-direction: column;
                 align-items: center;
+                padding: 1em;
             }
+
             nav a {
-                font-size: 1em;
+                font-size: 1.2em;
             }
+
             section h2 {
-                font-size: 2em;
+                font-size: 2.2em;
+            }
+
+            .cards-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 90%; /* Намаляваме максималната ширина */
+                padding: 15px;
+            }
+
+            .card h3 {
+                font-size: 1.8em;
+            }
+
+            .card p {
+                font-size: 1.1em;
+            }
+
+            footer p {
+                font-size: 1.1em;
             }
         }
 
@@ -317,6 +422,10 @@
 </head>
 <body>
     <!-- Начален екран -->
+    <!-- Стрелка за връщане нагоре -->
+    <div id="scrollToTop" style="display: none;">
+        &#8593; <!-- Unicode стрелка нагоре -->
+    </div>
     <div class="intro-screen">
         <div>
             <h1>Petar Kolev</h1>
@@ -325,7 +434,9 @@
     </div>
 
     <!-- Основно съдържание -->
+    
     <div class="content-wrapper">
+        <div id="clock">00:00:00</div>
         <header>
             <h1>My Main Website</h1>
             <p>I am Petar</p>
@@ -394,10 +505,47 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
+                // Скриваме интро екрана и показваме основното съдържание
                 document.querySelector('.intro-screen').style.display = 'none';
                 document.querySelector('.content-wrapper').style.display = 'block';
+
+                // Показваме часовника в content-wrapper
+                document.getElementById('clock').style.display = 'block';  // Ако е скрит по подразбиране
             }, 3000); 
+
+            updateClock(); 
+            setInterval(updateClock, 1000);
+    });
+
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Получаваме стрелката
+        const scrollToTopButton = document.getElementById('scrollToTop');
+
+        // Показваме стрелката, когато потребителят скролира надолу
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopButton.style.display = 'block'; // Показваме стрелката
+            } else {
+                scrollToTopButton.style.display = 'none'; // Скриваме стрелката
+            }
         });
+
+        // Когато стрелката е натисната, скролваме до най-горе
+        scrollToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Гладко скролиране нагоре
+        });
+    });
+
+
     </script>
 
 </body>
